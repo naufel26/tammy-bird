@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Tammy Bird</title>
+    <meta name="description" content="Flap Tammy through the pipes and climb the global leaderboard." />
+    <meta name="theme-color" content="#70c5ce" />
+    <link rel="icon" type="image/png" href="/face.png" />
+    <link rel="apple-touch-icon" href="/face.png" />
+
+    <!-- Link preview card (WhatsApp, X, Slack, iMessage…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tammy Bird" />
+    <meta property="og:description" content="Flap Tammy through the pipes and climb the global leaderboard." />
+    <meta property="og:image" content="%SITE_URL%/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="%SITE_URL%/og.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="wrap">
+      <canvas id="game" width="288" height="512"></canvas>
+
+      <button id="mute" class="icon-btn hidden" type="button" aria-label="Mute">🔊</button>
+      <button id="trophy" class="icon-btn hidden" type="button" aria-label="Leaderboard">🏆</button>
+
+      <div id="modal" class="hidden" role="dialog" aria-modal="true">
+        <div class="card">
+          <form id="name-form" class="hidden">
+            <h2>Top 10!</h2>
+            <p class="sub">You scored <b id="nf-score"></b>. Add your name to the leaderboard.</p>
+            <input id="name-input" maxlength="16" autocomplete="nickname" placeholder="Your name" required />
+            <p class="error" id="nf-error"></p>
+            <div class="row">
+              <button type="button" id="nf-skip" class="btn secondary">Skip</button>
+              <button type="submit" id="nf-submit" class="btn">Submit</button>
+            </div>
+          </form>
+
+          <div id="board-view" class="hidden">
+            <h2>Leaderboard</h2>
+            <ol id="board-list"></ol>
+            <p id="board-status" class="sub"></p>
+            <div class="row">
+              <button type="button" id="board-close" class="btn">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+#wrap {
+  position: relative;
+  height: min(100dvh, 100vw * 16 / 9);
+  aspect-ratio: 288 / 512;
+  container-type: size;
+  /* One game pixel (the game is 512 units tall), so overlays scale with the canvas */
+  --px: calc(100cqh / 512);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #70c5ce;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.icon-btn {
+  position: absolute;
+  top: calc(var(--px) * 10);
+  width: calc(var(--px) * 36);
+  height: calc(var(--px) * 36);
+  font-size: calc(var(--px) * 18);
+  line-height: 1;
+  padding: 0;
+  border: calc(var(--px) * 2) solid #543847;
+  border-radius: 50%;
+  background: #ded895;
+  cursor: pointer;
+}
+
+#mute {
+  left: calc(var(--px) * 10);
+}
+
+#trophy {
+  right: calc(var(--px) * 10);
+}
+
+#modal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.card {
+  width: 82%;
+  max-height: 88%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: calc(var(--px) * 14);
+  background: #ded895;
+  border: calc(var(--px) * 3) solid #543847;
+  border-radius: calc(var(--px) * 10);
+  color: #543847;
+  font-size: calc(var(--px) * 13);
+}
+
+.card h2 {
+  margin: 0 0 calc(var(--px) * 8);
+  text-align: center;
+  font-family: 'Luckiest Guy', system-ui, sans-serif;
+  font-size: calc(var(--px) * 26);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #fff;
+  -webkit-text-stroke: calc(var(--px) * 4) #2b2b2b;
+  paint-order: stroke fill;
+}
+
+.sub {
+  margin: 0 0 calc(var(--px) * 10);
+  text-align: center;
+}
+
+.error {
+  margin: calc(var(--px) * 4) 0 0;
+  min-height: calc(var(--px) * 14);
+  color: #c0392b;
+  text-align: center;
+}
+
+#name-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--px) * 8);
+  font: inherit;
+  font-size: max(16px, calc(var(--px) * 15)); /* ≥16px stops iOS zooming in on focus */
+  border: calc(var(--px) * 2) solid #543847;
+  border-radius: calc(var(--px) * 6);
+  background: #fff;
+  color: #222;
+}
+
+.row {
+  display: flex;
+  gap: calc(var(--px) * 8);
+  justify-content: center;
+  margin-top: calc(var(--px) * 10);
+}
+
+.btn {
+  flex: 1;
+  padding: calc(var(--px) * 8) calc(var(--px) * 10);
+  font: inherit;
+  font-weight: 800;
+  color: #fff;
+  background: #e86101;
+  border: calc(var(--px) * 2) solid #543847;
+  border-radius: calc(var(--px) * 6);
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background: #9a8f6a;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: rank;
+}
+
+#board-list li {
+  counter-increment: rank;
+  display: flex;
+  gap: calc(var(--px) * 8);
+  padding: calc(var(--px) * 4) calc(var(--px) * 6);
+  border-radius: calc(var(--px) * 4);
+}
+
+#board-list li:nth-child(odd) {
+  background: rgba(84, 56, 71, 0.08);
+}
+
+#board-list li::before {
+  content: counter(rank) '.';
+  width: calc(var(--px) * 22);
+  font-weight: 800;
+  text-align: right;
+}
+
+#board-list li.me {
+  background: #e86101;
+  color: #fff;
+}
+
+#board-list .name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#board-list .score {
+  font-weight: 800;
+}
