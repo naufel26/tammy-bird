@@ -440,15 +440,33 @@ const MEDALS = [
   { min: 10, name: 'Bronze', light: '#f0b27a', dark: '#a0582a' },
 ];
 
+function drawLockedMedal(cx, cy, r) {
+  // Faded medal with a dashed rim and a padlock: clearly "not earned yet" rather than missing
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fillStyle = '#cfc785';
+  ctx.fill();
+  ctx.setLineDash([4, 3]);
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#a89f62';
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Padlock
+  ctx.fillStyle = '#a89f62';
+  ctx.strokeStyle = '#a89f62';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(cx, cy - 3, 6, Math.PI, 0);
+  ctx.stroke();
+  roundRect(cx - 9, cy - 3, 18, 14, 3);
+  ctx.fill();
+  ctx.fillStyle = '#cfc785';
+  ctx.fillRect(cx - 1.5, cy + 1, 3, 6);
+}
+
 function drawMedal(cx, cy, r, medal, t) {
-  if (!medal) {
-    // Empty slot
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = '#cfc785';
-    ctx.fill();
-    return;
-  }
+  if (!medal) return drawLockedMedal(cx, cy, r);
   const g = ctx.createRadialGradient(cx - r / 3, cy - r / 3, 2, cx, cy, r);
   g.addColorStop(0, medal.light);
   g.addColorStop(1, medal.dark);
@@ -501,7 +519,13 @@ function drawScorePanel(cx, cy, t) {
   ctx.fillText('SCORE', cx + 50, y + 18);
   ctx.fillText('BEST', cx + 50, y + 62);
 
-  drawMedal(cx - 55, y + 62, 26, medal, t);
+  drawMedal(cx - 55, y + 58, 26, medal, t);
+
+  // Medal name, or how far to the first one
+  const nextMedal = MEDALS[MEDALS.length - 1];
+  ctx.font = "800 10px system-ui, -apple-system, 'Segoe UI', sans-serif";
+  ctx.fillStyle = medal ? '#543847' : '#9a8f5a';
+  ctx.fillText(medal ? medal.name.toUpperCase() : `${nextMedal.min} FOR ${nextMedal.name.toUpperCase()}`, cx - 55, y + 97);
   drawText(String(score), cx + 50, y + 42, 26);
   drawText(String(best), cx + 50, y + 86, 26);
 
