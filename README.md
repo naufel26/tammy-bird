@@ -68,7 +68,7 @@ npm run preview   # serves the build (static only, no /api)
 ## Deploy to Vercel
 
 1. Import this repository in Vercel (**Add New → Project**). The Vite preset is detected automatically; no settings to change.
-2. Add the leaderboard database: in the project, go to **Storage → Create Database → Upstash Redis** and connect it to the project. This sets the connection environment variables (`UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` or `KV_REST_API_URL`/`KV_REST_API_TOKEN`; either works).
+2. Add the leaderboard database: in the project, go to **Storage → Create Database → Upstash Redis** and connect it to the project. This adds the connection environment variables. Any of the naming styles Vercel uses works, including a custom prefix (e.g. `UPSTASH_REDIS_REST_KV_REST_API_URL` / `..._KV_REST_API_TOKEN`).
 3. Redeploy. Without the database, the game still works but the leaderboard shows "Couldn't load the leaderboard."
 
 ## Leaderboard API

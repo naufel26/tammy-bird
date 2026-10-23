@@ -6,9 +6,17 @@ const KEEP_N = 1000; // cap the stored set so it can't grow forever
 const MAX_SCORE = 9999;
 const MAX_NAME_LEN = 16;
 
-// Vercel's Upstash integration may expose either naming scheme
-const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+// Vercel's Upstash integration names these variables differently depending on setup, and may add a
+// custom prefix (e.g. UPSTASH_REDIS_REST_KV_REST_API_URL), so match on the suffix
+function env(...suffixes) {
+  for (const name of suffixes) if (process.env[name]) return process.env[name];
+  const key = Object.keys(process.env).find(
+    (k) => process.env[k] && !k.includes('READ_ONLY') && suffixes.some((s) => k.endsWith(`_${s}`)),
+  );
+  return key && process.env[key];
+}
+const url = env('UPSTASH_REDIS_REST_URL', 'KV_REST_API_URL');
+const token = env('UPSTASH_REDIS_REST_TOKEN', 'KV_REST_API_TOKEN');
 const redis = url && token ? new Redis({ url, token, automaticDeserialization: false }) : null;
 
 // Local dev without a database: keep scores in memory (lost on restart)
