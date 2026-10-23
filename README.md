@@ -98,6 +98,6 @@ Gameplay constants live at the top of `src/main.js`:
 | `SPEED_START` / `SPEED_MAX` | 120 / 160 | Scroll speed at the start / at max difficulty |
 | `GAP_START` / `GAP_MIN` | 125 / 100 | Pipe opening at the start / at max difficulty |
 | `RAMP_SCORE` | 50 | Score at which difficulty maxes out |
-| `PIPE_SPACING` | 170 | Horizontal distance between pipes |
+| `PIPE_SPACING` | 200 | Horizontal distance between pipes |
 | `FACE_H` | 46 | Face size on screen |
 | `bird.radius` | 16 | Collision radius (smaller = more forgiving) |

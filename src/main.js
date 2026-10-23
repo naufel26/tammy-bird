@@ -32,7 +32,7 @@ const GAP_MIN = 100;
 const PIPE_W = 52;
 const PIPE_CAP_H = 24;
 const PIPE_CAP_OVERHANG = 3; // cap is wider than the pipe body on each side
-const PIPE_SPACING = 170; // horizontal distance between pipe pairs
+const PIPE_SPACING = 200; // horizontal distance between pipe pairs
 const PIPE_MIN_EDGE = 50; // keep gaps this far from the top and the ground
 
 const pipes = []; // { x, gapY, gap, scored } where gapY is the top of the opening
